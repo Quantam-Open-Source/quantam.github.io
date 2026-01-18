@@ -1,0 +1,255 @@
+.app-root {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 3rem;
+  color: #111827;
+}
+
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.app-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.app-brand-name {
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.app-brand-tagline {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.app-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.app-nav-item {
+  border-radius: 999px;
+  border: 1px solid transparent;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background-color: transparent;
+  color: #374151;
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease,
+    border-color 120ms ease, box-shadow 120ms ease;
+  text-decoration: none;
+}
+
+.app-nav-item:hover {
+  background-color: #f0f0f0;
+}
+
+.app-nav-item-active {
+  background-color: #111827;
+  color: #f9fafb;
+  border-color: #111827;
+  box-shadow: 0 0 0 1px rgba(17, 24, 39, 0.12);
+}
+
+.app-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 1.75rem;
+  align-items: stretch;
+}
+
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.hero-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.hero-meta {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.primary-link {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  background-color: #111827;
+  color: #f9fafb;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background-color 120ms ease;
+}
+
+.primary-link:hover {
+  background-color: #020617;
+}
+
+.secondary-link {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  background-color: #ffffff;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background-color 120ms ease;
+}
+
+.secondary-link:hover {
+  background-color: #f9fafb;
+}
+
+.app-footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.app-footer span {
+  display: block;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin: 0 0 1rem 0;
+  font-weight: 700;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  margin: 1.5rem 0 0.5rem 0;
+  font-weight: 600;
+}
+
+.section-lead {
+  font-size: 0.95rem;
+  max-width: 52rem;
+  color: #6b7280;
+  margin: 0 0 1rem 0;
+  line-height: 1.6;
+}
+
+.section-text {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.95rem;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.api-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  border-radius: 0.9rem;
+  border: 1px solid #e5e7eb;
+  padding: 1.25rem 1.4rem;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
+}
+
+.card h2 {
+  margin: 0 0 0.35rem 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.list {
+  margin: 0.5rem 0 0;
+  padding-left: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.list li {
+  margin: 0;
+}
+
+.code-block {
+  margin: 0.75rem 0 0;
+  padding: 1rem;
+  border-radius: 0.7rem;
+  background: #020617;
+  color: #e5e7eb;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.85rem;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+.code-block code {
+  white-space: pre;
+  font-family: inherit;
+}
+
+@media (max-width: 640px) {
+  .app-root {
+    padding: 1.75rem 1.25rem 2.25rem;
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+}
