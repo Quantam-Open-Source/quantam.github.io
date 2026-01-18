@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage'
 import DocsPage from './pages/DocsPage'
 import ApiPage from './pages/ApiPage'
 import ExamplesPage from './pages/ExamplesPage'
+import ChangelogPage from './pages/ChangelogPage'
 import { updateSEO, seoMetadata } from '@/lib/seo'
 
 function AppContent() {
@@ -20,6 +21,7 @@ function AppContent() {
     if (pathname === '/docs') seoKey = 'docs'
     else if (pathname === '/api') seoKey = 'api'
     else if (pathname === '/examples') seoKey = 'examples'
+    else if (pathname === '/changelog') seoKey = 'changelog'
 
     updateSEO(seoMetadata[seoKey])
     window.scrollTo(0, 0)
@@ -34,6 +36,7 @@ function AppContent() {
           <Route path="/docs" element={<DocsPage />} />
           <Route path="/api" element={<ApiPage />} />
           <Route path="/examples" element={<ExamplesPage />} />
+          <Route path="/changelog" element={<ChangelogPage />} />
         </Routes>
       </main>
       <Footer />

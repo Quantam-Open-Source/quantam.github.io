@@ -17,7 +17,7 @@ function HeroSection() {
         <div className="mx-auto max-w-4xl text-center">
           <motion.div {...ANIMATION_VARIANTS.fadeInUp}>
             <Badge variant="secondary" className="mb-4">
-              Version 0.1.0 - Now Available
+              Version 0.1.1 - Now Available
             </Badge>
             <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
               Async workflows for{' '}

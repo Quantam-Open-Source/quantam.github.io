@@ -109,17 +109,32 @@ console.log(result)
             Run multiple operations concurrently for better performance:
           </p>
           <CodeBlock>{`const result = await quantam()
-  .step(fetchUser)
-  .parallel([
-    async (user) => fetchOrders(user),
-    async (user) => fetchProfile(user),
-  ])
-  .run('user-123')`}</CodeBlock>
+        .step(fetchUser)
+        .parallel([
+        async (user) => fetchOrders(user),
+        async (user) => fetchProfile(user),
+        ])
+        .run('user-123')`}</CodeBlock>
         </section>
-      </div>
-    </motion.div>
-  )
-}
+
+        <section>
+          <h2 className="text-xl sm:text-2xl font-semibold mb-4">Adding Step Names for Debugging</h2>
+          <p className="text-muted-foreground mb-4 text-sm sm:text-base">
+            Use .name() to label steps for clearer error messages:
+          </p>
+          <CodeBlock>{`const result = await quantam()
+        .step(fetchUser)
+        .name('fetchUser')
+        .step(fetchOrders)
+        .name('fetchOrders')
+        .retry(2, 100)
+        .timeout(5000)
+        .run('user-123')`}</CodeBlock>
+        </section>
+        </div>
+        </motion.div>
+        )
+        }
 
 function ConceptsContent() {
   const concepts = [
@@ -187,19 +202,99 @@ function ConceptsContent() {
   )
 }
 
+function StepNamingContent() {
+   return (
+     <motion.div
+       initial={{ opacity: 0, y: 20 }}
+       animate={{ opacity: 1, y: 0 }}
+       transition={{ duration: 0.3 }}
+       className="space-y-6 sm:space-y-8"
+     >
+       <SectionHeader
+         title="Step Naming"
+         description="Assign names to steps for better error messages, debugging context, and visibility into which step failed."
+         animate={false}
+       />
+
+       <div className="space-y-6 sm:space-y-8">
+         <section>
+           <h2 className="text-xl sm:text-2xl font-semibold mb-4">Why Name Steps</h2>
+           <p className="text-muted-foreground mb-4 text-sm sm:text-base">
+             When a pipeline fails, error messages are more helpful when you know which step caused the problem. Step names appear in error messages and are available in the context.
+           </p>
+           <CodeBlock>{`// Without names - unclear where it failed
+Error: Connection timeout
+
+// With names - immediately know the culprit  
+Error: Connection timeout (at step 'fetchUserData')`}</CodeBlock>
+         </section>
+
+         <section>
+           <h2 className="text-xl sm:text-2xl font-semibold mb-4">Using .name()</h2>
+           <p className="text-muted-foreground mb-4 text-sm sm:text-base">
+             Call .name() after a .step() to assign a label to that step:
+           </p>
+           <CodeBlock>{`const result = await quantam()
+   .step(validateInput)
+   .name('validateInput')
+   .step(fetchUserData)
+   .name('fetchUserData')
+   .step(enrichData)
+   .name('enrichData')
+   .run(input)`}</CodeBlock>
+         </section>
+
+         <section>
+           <h2 className="text-xl sm:text-2xl font-semibold mb-4">Error Messages with Step Names</h2>
+           <p className="text-muted-foreground mb-4 text-sm sm:text-base">
+             When an error occurs, it includes the step name that failed:
+           </p>
+           <CodeBlock>{`try {
+   const result = await quantam()
+     .step(fetchUser)
+     .name('fetchUser')
+     .step(processData)
+     .name('processData')
+     .run(userId)
+ } catch (error) {
+   // error.message might be: "Network error (at step 'fetchUser')"
+   console.error(error.message)
+ }`}</CodeBlock>
+         </section>
+
+         <section>
+           <h2 className="text-xl sm:text-2xl font-semibold mb-4">Accessing Step Names in Context</h2>
+           <p className="text-muted-foreground mb-4 text-sm sm:text-base">
+             The current step name is available in the context object inside your step function:
+           </p>
+           <CodeBlock>{`async function myStep(input: any, context: any) {
+   console.log(\`Currently executing: \${context.stepName}\`)
+   return processData(input)
+ }
+
+ const result = await quantam()
+   .step(myStep)
+   .name('myStep')
+   .run(data)`}</CodeBlock>
+         </section>
+       </div>
+     </motion.div>
+   )
+ }
+
 function ErrorHandlingContent() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="space-y-6 sm:space-y-8"
-    >
-      <SectionHeader
-        title="Error Handling"
-        description="Centralize error handling instead of scattering try/catch throughout your code."
-        animate={false}
-      />
+   return (
+     <motion.div
+       initial={{ opacity: 0, y: 20 }}
+       animate={{ opacity: 1, y: 0 }}
+       transition={{ duration: 0.3 }}
+       className="space-y-6 sm:space-y-8"
+     >
+       <SectionHeader
+         title="Error Handling"
+         description="Centralize error handling instead of scattering try/catch throughout your code."
+         animate={false}
+       />
 
       <div className="space-y-6 sm:space-y-8">
         <section>
@@ -371,6 +466,8 @@ function renderContent(activeSection: string): React.ReactNode {
       return <QuickStartContent />
     case 'concepts':
       return <ConceptsContent />
+    case 'step-naming':
+      return <StepNamingContent />
     case 'error-handling':
       return <ErrorHandlingContent />
     case 'cancellation':

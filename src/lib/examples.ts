@@ -207,54 +207,97 @@ async function withCancellation() {
     keyPoints: ['Type Safety', 'Data Validation'],
     code: `import { quantam } from 'quantam-async'
 
-interface RawData {
+  interface RawData {
   csv: string
-}
+  }
 
-interface ParsedData {
+  interface ParsedData {
   rows: any[]
-}
+  }
 
-interface ValidatedData {
+  interface ValidatedData {
   rows: any[]
   isValid: boolean
-}
+  }
 
-async function parseCSV(raw: RawData): Promise<ParsedData> {
+  async function parseCSV(raw: RawData): Promise<ParsedData> {
   const rows = raw.csv.split('\\n').map(line =>
-    line.split(',').reduce((obj, val, i) => ({
-      ...obj,
-      [i]: val.trim(),
-    }), {})
+   line.split(',').reduce((obj, val, i) => ({
+     ...obj,
+     [i]: val.trim(),
+   }), {})
   )
   return { rows }
-}
+  }
 
-async function validateData(parsed: ParsedData): Promise<ValidatedData> {
+  async function validateData(parsed: ParsedData): Promise<ValidatedData> {
   const isValid = parsed.rows.every(row => {
-    return Object.values(row).every(v => v !== '')
+   return Object.values(row).every(v => v !== '')
   })
   return { ...parsed, isValid }
-}
-
-async function enrich(validated: ValidatedData): Promise<any> {
-  return {
-    ...validated,
-    enrichedAt: new Date(),
-    rowCount: validated.rows.length,
   }
-}
 
-async function transformCSV(csvData: string) {
+  async function enrich(validated: ValidatedData): Promise<any> {
+  return {
+   ...validated,
+   enrichedAt: new Date(),
+   rowCount: validated.rows.length,
+  }
+  }
+
+  async function transformCSV(csvData: string) {
   return await quantam()
-    .step((csv) => ({ csv }))
-    .step(parseCSV)
-    .step(validateData)
-    .step(enrich)
-    .run(csvData)
-}`,
+   .step((csv) => ({ csv }))
+   .step(parseCSV)
+   .step(validateData)
+   .step(enrich)
+   .run(csvData)
+  }`,
   },
-]
+  {
+    id: 'step-naming',
+    title: 'Step Naming for Debugging',
+    description: 'Add names to steps for clearer error messages and debugging context.',
+    icon: Shield,
+    difficulty: 'Beginner',
+    keyPoints: ['Error Context', 'Better Debugging'],
+    code: `import { quantam } from 'quantam-async'
+
+  async function validateInput(data: any) {
+  if (!data.id) throw new Error('Missing ID')
+  return data
+  }
+
+  async function fetchUserData(data: any) {
+  const res = await fetch(\`/api/users/\${data.id}\`)
+  if (!res.ok) throw new Error('Failed to fetch')
+  return res.json()
+  }
+
+  async function enrichWithMetadata(user: any) {
+  return { ...user, lastUpdated: new Date() }
+  }
+
+  async function getUserWithDebugging(userId: string) {
+  try {
+   const result = await quantam()
+     .step(validateInput)
+     .name('validateInput')
+     .step(fetchUserData)
+     .name('fetchUserData')
+     .step(enrichWithMetadata)
+     .name('enrichWithMetadata')
+     .run({ id: userId })
+   
+   return result
+  } catch (error) {
+   // Error now includes step name context:
+   // Error: Failed to fetch (at step 'fetchUserData')
+   console.error('Pipeline failed:', error.message)
+  }
+  }`,
+  },
+  ]
 
 export const DIFFICULTY_COLORS: Record<Difficulty, string> = {
   Beginner: 'bg-green-100 text-green-800',

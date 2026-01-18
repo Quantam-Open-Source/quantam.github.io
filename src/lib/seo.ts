@@ -55,7 +55,17 @@ export const seoMetadata: Record<string, SEOMetadata> = {
       'Explore practical examples and patterns for building async workflows with Quantam.',
     canonical: `${SITE_URL}/examples`,
   },
-}
+  changelog: {
+    title: 'Changelog - Quantam',
+    description:
+      'Track the evolution of Quantam with detailed release notes. See all features, improvements, and bug fixes from version 0.1.0 onwards.',
+    keywords: ['changelog', 'releases', 'updates', 'version', 'history'],
+    ogTitle: 'Changelog - Quantam',
+    ogDescription:
+      'Stay updated with Quantam releases. See what\'s new, improved, and fixed in each version.',
+    canonical: `${SITE_URL}/changelog`,
+  },
+  }
 
 /**
  * Update document head with SEO metadata
@@ -121,4 +131,5 @@ export const routes = [
   { path: '/docs', changefreq: 'weekly', priority: 0.9 },
   { path: '/api', changefreq: 'weekly', priority: 0.9 },
   { path: '/examples', changefreq: 'monthly', priority: 0.8 },
+  { path: '/changelog', changefreq: 'monthly', priority: 0.7 },
 ]

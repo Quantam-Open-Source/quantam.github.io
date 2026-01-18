@@ -10,6 +10,7 @@ export const DOC_SECTIONS: DocSection[] = [
   { id: 'install', title: 'Install', icon: Book },
   { id: 'quickstart', title: 'Quick Start', icon: Zap },
   { id: 'concepts', title: 'Core Concepts', icon: Code },
+  { id: 'step-naming', title: 'Step Naming', icon: Code },
   { id: 'error-handling', title: 'Error Handling', icon: XCircle },
   { id: 'cancellation', title: 'Cancellation', icon: Clock },
   { id: 'batch', title: 'Batch Processing', icon: Database },

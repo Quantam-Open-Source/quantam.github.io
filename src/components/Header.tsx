@@ -9,6 +9,7 @@ const navigation = [
   { name: 'Docs', href: '/docs' },
   { name: 'API', href: '/api' },
   { name: 'Examples', href: '/examples' },
+  { name: 'Changelog', href: '/changelog' },
 ]
 
 export default function Header() {
