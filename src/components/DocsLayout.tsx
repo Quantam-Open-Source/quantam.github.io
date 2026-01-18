@@ -1,8 +1,7 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Menu } from 'lucide-react'
-import { ReactNode } from 'react'
 
 interface Section {
   id: string

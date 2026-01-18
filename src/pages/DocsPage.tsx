@@ -22,8 +22,8 @@ function InstallContent() {
       />
 
       <div className="grid gap-4 sm:gap-6">
-        {(Object.entries(INSTALLATION_COMMANDS) as const).map(([key, command]) => {
-          const icons = INSTALL_ICONS[key]
+        {Object.entries(INSTALLATION_COMMANDS).map(([key, command]) => {
+          const icons = INSTALL_ICONS[key as keyof typeof INSTALL_ICONS]
           return (
             <Card key={key}>
               <CardHeader>

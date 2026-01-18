@@ -1,4 +1,4 @@
-import { Book, Code, Zap, Shield, Clock, XCircle, Database } from 'lucide-react'
+import { Book, Code, Zap, Clock, XCircle, Database } from 'lucide-react'
 
 export interface DocSection {
   id: string

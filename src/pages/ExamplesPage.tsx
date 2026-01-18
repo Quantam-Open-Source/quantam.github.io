@@ -93,13 +93,11 @@ function ExampleSidebar({
 }
 
 function ExampleContent({ example }: { example: (typeof EXAMPLES)[0] | null }) {
-  if (!example) {
-    return <div className="p-8 text-center text-muted-foreground">Select an example to view</div>
-  }
-
-  const IconComponent = example.icon
-
-  return (
+   if (!example) {
+     return <div className="p-8 text-center text-muted-foreground">Select an example to view</div>
+   }
+ 
+   return (
     <motion.div
       key={example.id}
       initial={{ opacity: 0, y: 20 }}
